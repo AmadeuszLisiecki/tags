@@ -1,0 +1,217 @@
+{
+  "items": [
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 0,
+      "name": "mini-sql"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 0,
+      "name": "ibm"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 0,
+      "name": "announcement"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "defu"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "type-fest"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "msql"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "pagbank"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "azure-confidential-ledger"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "mockito-python"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "chaos-mesh"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "data-portability-api"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "dexie-cloud"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "gleamlang"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "spatie-google-analytics"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "textadept"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "great-tables"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "sqlalchemy-stubs"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "source-map-explorer"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "wasp-lang"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "swiggy-api"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "flutter-asset"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "htmlkit"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": ".http-files"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "lazyhstack"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "birl"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "elli"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "k8slens"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "haproxy-frontend"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "ryzen"
+    },
+    {
+      "has_synonyms": false,
+      "is_moderator_only": false,
+      "is_required": false,
+      "count": 1,
+      "name": "pigment-css"
+    }
+  ],
+  "has_more": true,
+  "quota_max": 10000,
+  "quota_remaining": 9972
+}
