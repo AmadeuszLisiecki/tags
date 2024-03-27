@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { Checkbox } from '@mui/material';
+import { Checkbox, Pagination } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -15,10 +15,16 @@ export const TagsContent = () => {
   const url = 'tags/desc.json';
 
   const [pages, setPages] = useState('');
+  const [page, setPage] = useState(1);
 
   const handleChange = (event: SelectChangeEvent) => {
     console.log(event.target.value);
     setPages(event.target.value);
+  };
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    console.log(event, value);
+    setPage(value);
   };
 
   const { isPending, error, data } = useQuery({
@@ -68,6 +74,12 @@ export const TagsContent = () => {
       </div>
 
       <TagsList tags={tags} />
+
+      <Pagination 
+        count={3} 
+        page={page} 
+        onChange={handlePageChange} 
+      />
     </div>
   );
 };
