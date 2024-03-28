@@ -5,11 +5,11 @@ type TagListProps = {
 }
 
 export const TagsList = ({ tags }: TagListProps) => (
-  <ul>
+  <ol>
     {tags.map(({ name, count }: Tag) => (
       <li key={name}>
         {`Name: ${name}, posts count: ${count}`}
       </li>
     ))}
-  </ul>
+  </ol>
 );

@@ -22,6 +22,7 @@ export const TagsContent = () => {
   const [page, setPage] = useState('1');
 
   const pagesNumber = +pages;
+  const pageNumber = +page;
 
   const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
     console.log(event, checked);
@@ -89,7 +90,16 @@ export const TagsContent = () => {
     return <h1>{error.message}</h1>;
   }
 
-  const tags = data.items as Tag[];
+  let tags = data.items as Tag[];
+
+  if (pagesNumber > 1) {
+    const allTagsCount = tags.length;
+    const tagsCountOnPage = allTagsCount / pagesNumber;
+    const startIndex = tagsCountOnPage * (pageNumber - 1);
+    const endIndex = tagsCountOnPage * pageNumber - 1;
+
+    tags = tags.filter((_tag, index) => index >= startIndex && index <= endIndex);
+  }
 
   return (
     <div>
@@ -124,7 +134,7 @@ export const TagsContent = () => {
       {pagesNumber > 1 && (
         <Pagination 
           count={pagesNumber} 
-          page={+page} 
+          page={pageNumber} 
           onChange={handlePageChange} 
         />
       )}
