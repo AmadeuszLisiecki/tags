@@ -10,13 +10,14 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { Tag } from "../types/Tag";
 import { TagsList } from "./TagsList";
-import { getTags } from "../api/tags";
+import { getTags } from "../api/tags"; 
 
 export const TagsContent = () => {
   // const url = 'https://api.stackexchange.com/2.3/tags?order=desc&sort=activity&site=stackoverflow';
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const url = `tags/${searchParams.get('sort')}.json`;
+  const sort = searchParams.get('sort');
+  const url = `tags/${sort}.json`;
 
   const [pages, setPages] = useState('1');
   const [page, setPage] = useState('1');
@@ -108,7 +109,12 @@ export const TagsContent = () => {
       <div>
         <FormControlLabel 
           sx={{ m: 2 }} 
-          control={<Checkbox defaultChecked onChange={handleSortChange} />} 
+          control={(
+            <Checkbox 
+              checked={sort === 'desc'}
+              onChange={handleSortChange}
+            />
+          )} 
           label="Sort DESC" 
         />
 
