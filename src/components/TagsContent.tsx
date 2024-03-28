@@ -21,33 +21,9 @@ export const TagsContent = () => {
   const [pages, setPages] = useState('1');
   const [page, setPage] = useState('1');
 
-  const handleChange = (event: SelectChangeEvent) => {
-    const newPages = event.target.value;
-    console.log(newPages);
-    setPages(newPages);
+  const pagesNumber = +pages;
 
-    if (newPages === '1') {
-      if (searchParams.has('pages')) {
-        searchParams.delete('pages');
-        setSearchParams(searchParams);
-      }
-    } else if (newPages === '2' || newPages === '3') {
-      searchParams.set('pages', newPages);
-      setSearchParams(searchParams);
-    }
-  };
-
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    console.log(event, value);
-    setPage(value.toString());
-
-    if (value) {
-      searchParams.set('pages', value.toString());
-      setSearchParams(searchParams);
-    }
-  };
-
-  const handleCheckChange = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+  const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
     console.log(event, checked);
     searchParams.set('sort', checked ? 'desc' : 'asc');
     setSearchParams(searchParams);
@@ -56,6 +32,34 @@ export const TagsContent = () => {
 
     mutation.mutate(url);
   }
+
+  const handlePagesChange = (event: SelectChangeEvent) => {
+    const newPages = event.target.value;
+    console.log(newPages);
+    setPages(newPages);
+
+    if (newPages === '1') {
+      if (searchParams.has('pages')) {
+        searchParams.delete('pages');
+        searchParams.delete('page');
+        setSearchParams(searchParams);
+        setPage('1');
+      }
+    } else if (newPages === '2' || newPages === '3') {
+      searchParams.set('pages', newPages);
+      searchParams.set('page', '1');
+      setSearchParams(searchParams);
+      setPage('1');
+    }
+  };
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    console.log(event, value);
+    setPage(value.toString());
+    
+    searchParams.set('page', value.toString());
+    setSearchParams(searchParams);
+  };
 
   useEffect(() => {
     if (!searchParams.has('sort')) {
@@ -94,7 +98,7 @@ export const TagsContent = () => {
       <div>
         <FormControlLabel 
           sx={{ m: 2 }} 
-          control={<Checkbox defaultChecked onChange={handleCheckChange} />} 
+          control={<Checkbox defaultChecked onChange={handleSortChange} />} 
           label="Sort DESC" 
         />
 
@@ -103,7 +107,7 @@ export const TagsContent = () => {
           <Select
             labelId="demo-simple-select-filled-label"
             id="demo-simple-select-filled"
-            onChange={handleChange}
+            onChange={handlePagesChange}
             value={pages}
           >
             <MenuItem value="1">
@@ -117,9 +121,9 @@ export const TagsContent = () => {
 
       <TagsList tags={tags} />
 
-      {+pages > 1 && (
+      {pagesNumber > 1 && (
         <Pagination 
-          count={+pages} 
+          count={pagesNumber} 
           page={+page} 
           onChange={handlePageChange} 
         />
