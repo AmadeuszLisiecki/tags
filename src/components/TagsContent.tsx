@@ -8,11 +8,14 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { Tag } from "../types/Tag";
 import { TagsList } from "./TagsList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const TagsContent = () => {
   // const url = 'https://api.stackexchange.com/2.3/tags?order=desc&sort=activity&site=stackoverflow';
-  const url = 'tags/desc.json';
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const url = `tags/${searchParams.get('sort')}.json`;
 
   const [pages, setPages] = useState('');
   const [page, setPage] = useState(1);
@@ -27,12 +30,27 @@ export const TagsContent = () => {
     setPage(value);
   };
 
+  const handleCheckChange = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    console.log(event, checked);
+    searchParams.set('sort', checked ? 'desc' : 'asc');
+    setSearchParams(searchParams);
+  }
+
+  useEffect(() => {
+    if (!searchParams.has('sort')) {
+      console.log('aaa');
+      searchParams.set('sort', 'desc');
+      setSearchParams(searchParams);
+    }
+  })
+
   const { isPending, error, data } = useQuery({
     queryKey: ['tags'],
     queryFn: () =>
-      fetch(url).then((res) =>
-        res.json(),
-      ),
+      fetch(url)
+        .then((res) =>
+          res.json(),
+        ),
   });
 
   if (isPending) {
@@ -52,7 +70,7 @@ export const TagsContent = () => {
       <div>
         <FormControlLabel 
           sx={{ m: 2 }} 
-          control={<Checkbox defaultChecked />} 
+          control={<Checkbox defaultChecked onChange={handleCheckChange} />} 
           label="Sort DESC" 
         />
 
