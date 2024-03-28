@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -17,10 +17,9 @@ export const TagsContent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sort = searchParams.get('sort');
+  const pages = searchParams.get('pages') || '1';
+  const page = searchParams.get('page') || '1';
   const url = `tags/${sort}.json`;
-
-  const [pages, setPages] = useState('1');
-  const [page, setPage] = useState('1');
 
   const pagesNumber = +pages;
   const pageNumber = +page;
@@ -38,27 +37,21 @@ export const TagsContent = () => {
   const handlePagesChange = (event: SelectChangeEvent) => {
     const newPages = event.target.value;
     console.log(newPages);
-    setPages(newPages);
 
     if (newPages === '1') {
       if (searchParams.has('pages')) {
         searchParams.delete('pages');
         searchParams.delete('page');
         setSearchParams(searchParams);
-        setPage('1');
       }
     } else if (newPages === '2' || newPages === '3') {
       searchParams.set('pages', newPages);
       searchParams.set('page', '1');
       setSearchParams(searchParams);
-      setPage('1');
     }
   };
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    console.log(event, value);
-    setPage(value.toString());
-    
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     searchParams.set('page', value.toString());
     setSearchParams(searchParams);
   };
@@ -124,7 +117,7 @@ export const TagsContent = () => {
             labelId="demo-simple-select-filled-label"
             id="demo-simple-select-filled"
             onChange={handlePagesChange}
-            value={pages}
+            value={searchParams.get('pages') || '1'}
           >
             <MenuItem value="1">
               <em>1</em>
