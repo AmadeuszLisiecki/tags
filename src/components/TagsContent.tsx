@@ -77,11 +77,15 @@ export const TagsContent = () => {
   })
 
   if (isPending) {
-    return <h1>{'Is pending'}</h1>;
+    return <h1>Is pending</h1>;
   }
 
   if (error) {
     return <h1>{error.message}</h1>;
+  }
+
+  if (pagesNumber < pageNumber) {
+    return <h1>Page number is greater than other numbers</h1>;
   }
 
   let tags = data.items as Tag[];
