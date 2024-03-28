@@ -1,4 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Checkbox, Pagination } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
@@ -8,8 +10,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { Tag } from "../types/Tag";
 import { TagsList } from "./TagsList";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { getTags } from "../api/tags";
 
 export const TagsContent = () => {
   // const url = 'https://api.stackexchange.com/2.3/tags?order=desc&sort=activity&site=stackoverflow';
@@ -34,24 +35,31 @@ export const TagsContent = () => {
     console.log(event, checked);
     searchParams.set('sort', checked ? 'desc' : 'asc');
     setSearchParams(searchParams);
+
+    const url = `tags/${searchParams.get('sort')}.json`;
+
+    mutation.mutate(url);
   }
 
   useEffect(() => {
     if (!searchParams.has('sort')) {
-      console.log('aaa');
       searchParams.set('sort', 'desc');
       setSearchParams(searchParams);
     }
-  })
+  }, [searchParams, setSearchParams])
 
   const { isPending, error, data } = useQuery({
     queryKey: ['tags'],
-    queryFn: () =>
-      fetch(url)
-        .then((res) =>
-          res.json(),
-        ),
+    queryFn: () => getTags(url),
   });
+
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    mutationFn: getTags,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tags'] })
+    },
+  })
 
   if (isPending) {
     return <h1>{'Is pending'}</h1>;
