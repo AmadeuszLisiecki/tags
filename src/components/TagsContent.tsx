@@ -18,17 +18,33 @@ export const TagsContent = () => {
 
   const url = `tags/${searchParams.get('sort')}.json`;
 
-  const [pages, setPages] = useState('');
-  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState('1');
+  const [page, setPage] = useState('1');
 
   const handleChange = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
-    setPages(event.target.value);
+    const newPages = event.target.value;
+    console.log(newPages);
+    setPages(newPages);
+
+    if (newPages === '1') {
+      if (searchParams.has('pages')) {
+        searchParams.delete('pages');
+        setSearchParams(searchParams);
+      }
+    } else if (newPages === '2' || newPages === '3') {
+      searchParams.set('pages', newPages);
+      setSearchParams(searchParams);
+    }
   };
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     console.log(event, value);
-    setPage(value);
+    setPage(value.toString());
+
+    if (value) {
+      searchParams.set('pages', value.toString());
+      setSearchParams(searchParams);
+    }
   };
 
   const handleCheckChange = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
@@ -82,7 +98,7 @@ export const TagsContent = () => {
           label="Sort DESC" 
         />
 
-        <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+        <FormControl variant="filled" sx={{ m: 1, minWidth: 100 }}>
           <InputLabel id="demo-simple-select-filled-label">Pages</InputLabel>
           <Select
             labelId="demo-simple-select-filled-label"
@@ -90,22 +106,24 @@ export const TagsContent = () => {
             onChange={handleChange}
             value={pages}
           >
-            <MenuItem value="">
-              <em>None</em>
+            <MenuItem value="1">
+              <em>1</em>
             </MenuItem>
-            <MenuItem value={2}>2</MenuItem>
-            <MenuItem value={3}>3</MenuItem>
+            <MenuItem value="2">2</MenuItem>
+            <MenuItem value="3">3</MenuItem>
           </Select>
         </FormControl>
       </div>
 
       <TagsList tags={tags} />
 
-      <Pagination 
-        count={3} 
-        page={page} 
-        onChange={handlePageChange} 
-      />
+      {+pages > 1 && (
+        <Pagination 
+          count={+pages} 
+          page={+page} 
+          onChange={handlePageChange} 
+        />
+      )}
     </div>
   );
 };
