@@ -106,11 +106,19 @@ export const TagsContent = () => {
   }
 
   if (error) {
-    return <Title>{`An error occured ${error.message}`}</Title>;
+    return <Title>{`An error occured - ${error.message}`}</Title>;
+  }
+
+  if (pagesNumber > +VALUES.PAGE_3 || pageNumber > +VALUES.PAGE_3) {
+    return <Title>Too many pages.</Title>;
+  }
+
+  if (sort && sort !== VALUES.SORT_ASC && sort !== VALUES.SORT_DESC) {
+    return <Title>Bad sort value.</Title>
   }
 
   if (pagesNumber < pageNumber) {
-    return <h1>Page number is greater than other numbers</h1>;
+    return <h1>Page number is greater than other numbers.</h1>;
   }
 
   let tags = data.items as Tag[];
