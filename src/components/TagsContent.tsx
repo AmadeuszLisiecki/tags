@@ -16,6 +16,7 @@ import TableRow from '@mui/material/TableRow';
 
 import { Tag } from "../types/Tag";
 import { getTags } from "../api/tags";
+import { Title } from "./Title";
 
 const KEYS = {
   SORT: 'sort',
@@ -101,11 +102,11 @@ export const TagsContent = () => {
   });
 
   if (isPending) {
-    return <h1>Feching tags. Please wait!</h1>;
+    return <Title>Feching tags. Please wait!</Title>;
   }
 
   if (error) {
-    return <h1>{`An error occured ${error.message}`}</h1>;
+    return <Title>{`An error occured ${error.message}`}</Title>;
   }
 
   if (pagesNumber < pageNumber) {
@@ -125,7 +126,7 @@ export const TagsContent = () => {
 
   return (
     <div>
-      <h1>List of tags with posts from Stackoverflow</h1>
+      <Title>List of tags with posts from Stackoverflow</Title>
 
       <FormControlLabel
         sx={{ m: 2 }}
@@ -146,9 +147,7 @@ export const TagsContent = () => {
           onChange={handlePagesChange}
           value={pages}
         >
-          <MenuItem value={VALUES.PAGE_1}>
-            <em>1</em>
-          </MenuItem>
+          <MenuItem value={VALUES.PAGE_1}>1</MenuItem>
           <MenuItem value={VALUES.PAGE_2}>2</MenuItem>
           <MenuItem value={VALUES.PAGE_3}>3</MenuItem>
         </Select>
