@@ -7,10 +7,15 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 import { Tag } from "../types/Tag";
-import { TagsList } from "./TagsList";
-import { getTags } from "../api/tags"; 
+import { getTags } from "../api/tags";
 
 const KEYS = {
   SORT: 'sort',
@@ -122,44 +127,65 @@ export const TagsContent = () => {
     <div>
       <h1>List of tags with comments</h1>
 
-      <div>
-        <FormControlLabel 
-          sx={{ m: 2 }} 
-          control={(
-            <Checkbox 
-              checked={sort === VALUES.SORT_DESC}
-              onChange={handleSortChange}
-            />
-          )} 
-          label="Sort DESC" 
-        />
+      <FormControlLabel
+        sx={{ m: 2 }}
+        control={(
+          <Checkbox
+            checked={sort === VALUES.SORT_DESC}
+            onChange={handleSortChange}
+          />
+        )}
+        label="Sort DESC"
+      />
 
-        <FormControl variant="filled" sx={{ m: 1, minWidth: 100 }}>
-          <InputLabel id="demo-simple-select-filled-label">Pages</InputLabel>
-          <Select
-            labelId="demo-simple-select-filled-label"
-            id="demo-simple-select-filled"
-            onChange={handlePagesChange}
-            value={pages}
-          >
-            <MenuItem value={VALUES.PAGE_1}>
-              <em>1</em>
-            </MenuItem>
-            <MenuItem value={VALUES.PAGE_2}>2</MenuItem>
-            <MenuItem value={VALUES.PAGE_3}>3</MenuItem>
-          </Select>
-        </FormControl>
+      <FormControl variant="filled" sx={{ m: 1, minWidth: 100 }}>
+        <InputLabel id="demo-simple-select-filled-label">Pages</InputLabel>
+        <Select
+          labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-filled"
+          onChange={handlePagesChange}
+          value={pages}
+        >
+          <MenuItem value={VALUES.PAGE_1}>
+            <em>1</em>
+          </MenuItem>
+          <MenuItem value={VALUES.PAGE_2}>2</MenuItem>
+          <MenuItem value={VALUES.PAGE_3}>3</MenuItem>
+        </Select>
+      </FormControl>
+
+      <div className="tags">
+        <TableContainer>
+          <Table sx={{ maxWidth: 450 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell><b>Number</b></TableCell>
+                <TableCell align="center"><b>Tag name</b></TableCell>
+                <TableCell align="right"><b>Posts count</b></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {tags.map(({ name, count }, index) => {
+                return (
+                  <TableRow key={name}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell align="center">{name}</TableCell>
+                    <TableCell align="right">{count}</TableCell>
+                  </TableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        {pagesNumber > 1 && (
+          <Pagination
+            count={pagesNumber}
+            page={pageNumber}
+            onChange={handlePageChange}
+          />
+        )}
       </div>
-
-      <TagsList tags={tags} />
-
-      {pagesNumber > 1 && (
-        <Pagination 
-          count={pagesNumber} 
-          page={pageNumber} 
-          onChange={handlePageChange} 
-        />
-      )}
     </div>
   );
 };
