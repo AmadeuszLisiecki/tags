@@ -12,25 +12,44 @@ import { Tag } from "../types/Tag";
 import { TagsList } from "./TagsList";
 import { getTags } from "../api/tags"; 
 
+const KEYS = {
+  SORT: 'sort',
+  PAGES: 'pages',
+  PAGE: 'page',
+  TAGS: 'tags',
+};
+const VALUES = {
+  'SORT_ASC': 'asc',
+  'SORT_DESC': 'desc',
+  'PAGE_1': '1',
+  'PAGE_2': '2',
+  'PAGE_3': '3',
+};
+
+const generateUrl = (sortType: string) => `tags/${sortType}.json`;
+
 export const TagsContent = () => {
   // const url = 'https://api.stackexchange.com/2.3/tags?order=desc&sort=activity&site=stackoverflow';
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const sort = searchParams.get('sort');
-  const pages = searchParams.get('pages') || '1';
-  const page = searchParams.get('page') || '1';
-  const url = `tags/${sort}.json`;
+  const sort = searchParams.get(KEYS.SORT) || VALUES.SORT_DESC;
+  const pages = searchParams.get(KEYS.PAGES) || VALUES.PAGE_1;
+  const page = searchParams.get(KEYS.PAGE) || VALUES.PAGE_1;
+  const url = generateUrl(sort);
 
   const pagesNumber = +pages;
   const pageNumber = +page;
 
-  const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-    console.log(event, checked);
-    searchParams.set('sort', checked ? 'desc' : 'asc');
+  const handleSortChange = (_event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    const newSort = checked ? VALUES.SORT_DESC : VALUES.SORT_ASC;
+    const url = generateUrl(newSort);
+
+    if (pageNumber > +VALUES.PAGE_1) {
+      searchParams.set(KEYS.PAGE, VALUES.PAGE_1);
+    }
+
+    searchParams.set(KEYS.SORT, newSort);
     setSearchParams(searchParams);
-
-    const url = `tags/${searchParams.get('sort')}.json`;
-
     mutation.mutate(url);
   }
 
@@ -38,33 +57,33 @@ export const TagsContent = () => {
     const newPages = event.target.value;
     console.log(newPages);
 
-    if (newPages === '1') {
-      if (searchParams.has('pages')) {
-        searchParams.delete('pages');
-        searchParams.delete('page');
+    if (newPages === VALUES.PAGE_1) {
+      if (searchParams.has(KEYS.PAGES)) {
+        searchParams.delete(KEYS.PAGES);
+        searchParams.delete(KEYS.PAGE);
         setSearchParams(searchParams);
       }
-    } else if (newPages === '2' || newPages === '3') {
-      searchParams.set('pages', newPages);
-      searchParams.set('page', '1');
+    } else if (+newPages > +VALUES.PAGE_1) {
+      searchParams.set(KEYS.PAGES, newPages);
+      searchParams.set(KEYS.PAGE, VALUES.PAGE_1);
       setSearchParams(searchParams);
     }
   };
 
   const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
-    searchParams.set('page', value.toString());
+    searchParams.set(KEYS.PAGE, value.toString());
     setSearchParams(searchParams);
   };
 
   useEffect(() => {
-    if (!searchParams.has('sort')) {
-      searchParams.set('sort', 'desc');
+    if (!searchParams.has(KEYS.SORT)) {
+      searchParams.set(KEYS.SORT, VALUES.SORT_DESC);
       setSearchParams(searchParams);
     }
   }, [searchParams, setSearchParams])
 
   const { isPending, error, data } = useQuery({
-    queryKey: ['tags'],
+    queryKey: [KEYS.TAGS],
     queryFn: () => getTags(url),
   });
 
@@ -72,16 +91,16 @@ export const TagsContent = () => {
   const mutation = useMutation({
     mutationFn: getTags,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tags'] })
+      queryClient.invalidateQueries({ queryKey: [KEYS.TAGS] })
     },
-  })
+  });
 
   if (isPending) {
-    return <h1>Is pending</h1>;
+    return <h1>Feching tags. Please wait!</h1>;
   }
 
   if (error) {
-    return <h1>{error.message}</h1>;
+    return <h1>{`An error occured ${error.message}`}</h1>;
   }
 
   if (pagesNumber < pageNumber) {
@@ -108,7 +127,7 @@ export const TagsContent = () => {
           sx={{ m: 2 }} 
           control={(
             <Checkbox 
-              checked={sort === 'desc'}
+              checked={sort === VALUES.SORT_DESC}
               onChange={handleSortChange}
             />
           )} 
@@ -121,13 +140,13 @@ export const TagsContent = () => {
             labelId="demo-simple-select-filled-label"
             id="demo-simple-select-filled"
             onChange={handlePagesChange}
-            value={searchParams.get('pages') || '1'}
+            value={pages}
           >
-            <MenuItem value="1">
+            <MenuItem value={VALUES.PAGE_1}>
               <em>1</em>
             </MenuItem>
-            <MenuItem value="2">2</MenuItem>
-            <MenuItem value="3">3</MenuItem>
+            <MenuItem value={VALUES.PAGE_2}>2</MenuItem>
+            <MenuItem value={VALUES.PAGE_3}>3</MenuItem>
           </Select>
         </FormControl>
       </div>
