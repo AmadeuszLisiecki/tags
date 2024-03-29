@@ -125,7 +125,7 @@ export const TagsContent = () => {
 
   return (
     <div>
-      <h1>List of tags with comments</h1>
+      <h1>List of tags with posts from Stackoverflow</h1>
 
       <FormControlLabel
         sx={{ m: 2 }}
