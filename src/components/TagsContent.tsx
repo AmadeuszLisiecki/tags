@@ -32,10 +32,10 @@ const VALUES = {
   'PAGE_3': '3',
 };
 
-const generateUrl = (sortType: string) => `tags/${sortType}.json`;
+const generateUrl = (sortType: string) => 
+  `https://api.stackexchange.com/2.3/tags?order=${sortType}&sort=popular&site=stackoverflow`;
 
 export const TagsContent = () => {
-  // const url = 'https://api.stackexchange.com/2.3/tags?order=desc&sort=activity&site=stackoverflow';
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sort = searchParams.get(KEYS.SORT) || VALUES.SORT_DESC;
