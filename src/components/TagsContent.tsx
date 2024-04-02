@@ -1,22 +1,15 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { Checkbox, Pagination } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { SelectChangeEvent } from '@mui/material/Select';
 
 import { Tag } from "../types/Tag";
 import { getTags } from "../api/tags";
 import { Title } from "./Title";
+import { CheckboxWrapper } from "./wrappers/CheckboxWrapper";
+import { SelectWrapper } from "./wrappers/SelectWrapper";
+import { TableWrapper } from "./wrappers/TableWrapper";
+import { PaginationWrapper } from "./wrappers/PaginationWrapper";
 
 const KEYS = {
   SORT: 'sort',
@@ -31,6 +24,7 @@ const VALUES = {
   'PAGE_2': '2',
   'PAGE_3': '3',
 };
+const POSSIBLE_PAGES = [VALUES['PAGE_1'], VALUES['PAGE_2'], VALUES['PAGE_3']];
 
 const generateUrl = (sortType: string) => 
   `https://api.stackexchange.com/2.3/tags?order=${sortType}&sort=popular&site=stackoverflow`;
@@ -136,57 +130,22 @@ export const TagsContent = () => {
     <div>
       <Title>List of tags with posts from Stackoverflow</Title>
 
-      <FormControlLabel
-        sx={{ m: 2 }}
-        control={(
-          <Checkbox
-            checked={sort === VALUES.SORT_DESC}
-            onChange={handleSortChange}
-          />
-        )}
-        label="Sort DESC"
+      <CheckboxWrapper
+        isChecked={sort === VALUES.SORT_DESC}
+        onChange={handleSortChange}
       />
 
-      <FormControl variant="filled" sx={{ m: 1, minWidth: 100 }}>
-        <InputLabel id="demo-simple-select-filled-label">Pages</InputLabel>
-        <Select
-          labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-filled"
-          onChange={handlePagesChange}
-          value={pages}
-        >
-          <MenuItem value={VALUES.PAGE_1}>1</MenuItem>
-          <MenuItem value={VALUES.PAGE_2}>2</MenuItem>
-          <MenuItem value={VALUES.PAGE_3}>3</MenuItem>
-        </Select>
-      </FormControl>
+      <SelectWrapper
+        onChange={handlePagesChange}
+        selectedPagesCount={pages}
+        possiblePagesCounts={POSSIBLE_PAGES}
+      />
 
       <div className="tags">
-        <TableContainer>
-          <Table sx={{ maxWidth: 450 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell><b>Number</b></TableCell>
-                <TableCell align="center"><b>Tag name</b></TableCell>
-                <TableCell align="right"><b>Posts count</b></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {tags.map(({ name, count }, index) => {
-                return (
-                  <TableRow key={name}>
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell align="center">{name}</TableCell>
-                    <TableCell align="right">{count}</TableCell>
-                  </TableRow>
-                )
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <TableWrapper tags={tags} />
 
         {pagesNumber > 1 && (
-          <Pagination
+          <PaginationWrapper
             count={pagesNumber}
             page={pageNumber}
             onChange={handlePageChange}
