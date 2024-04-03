@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { PaginationWrapper } from '../components/wrappers/PaginationWrapper';
+import { PaginationWrapper } from '../../components/wrappers/PaginationWrapper';
 
 const meta = {
   title: 'Example/PaginationWrapper',

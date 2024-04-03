@@ -10,6 +10,8 @@ import { CheckboxWrapper } from "./wrappers/CheckboxWrapper";
 import { SelectWrapper } from "./wrappers/SelectWrapper";
 import { TableWrapper } from "./wrappers/TableWrapper";
 import { PaginationWrapper } from "./wrappers/PaginationWrapper";
+import { generateUrl } from "../helpers/getUrl";
+import { TITLES } from "../helpers/titles";
 
 const KEYS = {
   SORT: 'sort',
@@ -25,9 +27,6 @@ const VALUES = {
   'PAGE_3': '3',
 };
 const POSSIBLE_PAGES = [VALUES['PAGE_1'], VALUES['PAGE_2'], VALUES['PAGE_3']];
-
-const generateUrl = (sortType: string) => 
-  `https://api.stackexchange.com/2.3/tags?order=${sortType}&sort=popular&site=stackoverflow`;
 
 export const TagsContent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -75,13 +74,6 @@ export const TagsContent = () => {
     setSearchParams(searchParams);
   };
 
-  useEffect(() => {
-    if (!searchParams.has(KEYS.SORT)) {
-      searchParams.set(KEYS.SORT, VALUES.SORT_DESC);
-      setSearchParams(searchParams);
-    }
-  }, [searchParams, setSearchParams])
-
   const { isPending, error, data } = useQuery({
     queryKey: [KEYS.TAGS],
     queryFn: () => getTags(url),
@@ -95,24 +87,31 @@ export const TagsContent = () => {
     },
   });
 
+  useEffect(() => {
+    if (!searchParams.has(KEYS.SORT)) {
+      searchParams.set(KEYS.SORT, VALUES.SORT_DESC);
+      setSearchParams(searchParams);
+    }
+  }, [searchParams, setSearchParams]);
+
   if (isPending) {
-    return <Title>Feching tags. Please wait!</Title>;
+    return <Title>{TITLES.FETCHING}</Title>;
   }
 
   if (error) {
-    return <Title>{`An error occured - ${error.message}`}</Title>;
+    return <Title>{`${TITLES.ERROR} - ${error.message}`}</Title>;
   }
 
   if (pagesNumber > +VALUES.PAGE_3 || pageNumber > +VALUES.PAGE_3) {
-    return <Title>Too many pages.</Title>;
+    return <Title>{TITLES.TOO_MANY_PAGES}</Title>;
   }
 
   if (sort && sort !== VALUES.SORT_ASC && sort !== VALUES.SORT_DESC) {
-    return <Title>Bad sort value.</Title>
+    return <Title>{TITLES.BAD_SORT}</Title>
   }
 
   if (pagesNumber < pageNumber) {
-    return <h1>Page number is greater than other numbers.</h1>;
+    return <Title>{TITLES.INCORRECT_PAGE}</Title>;
   }
 
   let tags = data.items as Tag[];
@@ -128,7 +127,7 @@ export const TagsContent = () => {
 
   return (
     <div>
-      <Title>List of tags with posts from Stackoverflow</Title>
+      <Title>{TITLES.LOADED}</Title>
 
       <CheckboxWrapper
         isChecked={sort === VALUES.SORT_DESC}

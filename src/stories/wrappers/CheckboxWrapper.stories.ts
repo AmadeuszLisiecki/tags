@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { CheckboxWrapper } from '../components/wrappers/CheckboxWrapper';
+import { CheckboxWrapper } from '../../components/wrappers/CheckboxWrapper';
 
 const meta = {
   title: 'Example/CheckboxWrapper',

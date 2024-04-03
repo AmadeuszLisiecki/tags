@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { TableWrapper } from '../components/wrappers/TableWrapper';
+import { TableWrapper } from '../../components/wrappers/TableWrapper';
 import { 
   TAGS_DESC, 
   TAGS_DESC_FIRST_10, 
@@ -8,7 +8,7 @@ import {
   TAGS_DESC_LAST_10, 
   TAGS_DESC_LAST_15, 
   TAGS_DESC_MIDDLE_10,
-} from './tags/desc';
+} from '../../helpers/tags/desc';
 import { 
   TAGS_ASC, 
   TAGS_ASC_FIRST_10, 
@@ -16,7 +16,7 @@ import {
   TAGS_ASC_LAST_10, 
   TAGS_ASC_LAST_15, 
   TAGS_ASC_MIDDLE_10,
-} from './tags/asc';
+} from '../../helpers/tags/asc';
 
 const meta = {
   title: 'Example/TableWrapper',
