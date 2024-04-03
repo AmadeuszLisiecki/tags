@@ -1,33 +1,38 @@
-# Demo
-https://amadeuszlisiecki.github.io/tags/
+# Stackoverflow Tags
 
-# React + TypeScript + Vite
+## Project description
+This project contains a list of the most and the least popular tags on Stackoverflow with post count. Users can adeptly administer their sort types and choose page count. Sort and pagination parameters are saved in the URL query. Furthermore, the project boasts a responsive design catering to mobile and desktop environments. Users can see, what kind of technologies are the most popular, and which are the least popular and decide to start to learn them. I learned, how to use MUI, React query, and Storybook. The project is created with Vite.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Requirements
+Project need Node in [version 18+ or 20+](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) (tested with 18.20).
 
-Currently, two official plugins are available:
+## Used technologies
+The project is based on 
+* HTML,
+* CSS,
+* TypeScript,
+* Linter,
+* React,
+* React-router,
+* MUI,
+* React-query,
+* Storybook.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## API
+Tags are downloaded from [tags API desc](https://api.stackexchange.com/2.3/tags?order=desc&sort=popular&site=stackoverflow) and [tags API asc](https://api.stackexchange.com/2.3/tags?order=asc&sort=popular&site=stackoverflow).
 
-## Expanding the ESLint configuration
+## Site preview
+[Tags site](https://amadeuszlisiecki.github.io/tags/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Run local project
+- Install ```npm i```
+- Run ```npm start```
+- Go to browser and type localhost:5173/tags in URL.
 
-- Configure the top-level `parserOptions` property like this:
+## Storybook
+Project has designed Storybook.
+Run ```npm run storybook``` to see use of componets.
+Stories are saved in src/stories directory.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## License
+The MIT License (MIT) described in [license file](/LIICENSE.txt).
