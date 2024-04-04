@@ -10,23 +10,13 @@ import { CheckboxWrapper } from "./wrappers/CheckboxWrapper";
 import { SelectWrapper } from "./wrappers/SelectWrapper";
 import { TableWrapper } from "./wrappers/TableWrapper";
 import { PaginationWrapper } from "./wrappers/PaginationWrapper";
-import { generateUrl } from "../helpers/getUrl";
-import { TITLES } from "../helpers/titles";
-
-const KEYS = {
-  SORT: 'sort',
-  PAGES: 'pages',
-  PAGE: 'page',
-  TAGS: 'tags',
-};
-const VALUES = {
-  'SORT_ASC': 'asc',
-  'SORT_DESC': 'desc',
-  'PAGE_1': '1',
-  'PAGE_2': '2',
-  'PAGE_3': '3',
-};
-const POSSIBLE_PAGES = [VALUES['PAGE_1'], VALUES['PAGE_2'], VALUES['PAGE_3']];
+import { generateUrl } from "../helpers/functions";
+import { 
+  KEYS, 
+  POSSIBLE_PAGES, 
+  TITLES, 
+  VALUES 
+} from "../helpers/constants";
 
 export const TagsContent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -54,7 +44,6 @@ export const TagsContent = () => {
 
   const handlePagesChange = (event: SelectChangeEvent) => {
     const newPages = event.target.value;
-    console.log(newPages);
 
     if (newPages === VALUES.PAGE_1) {
       if (searchParams.has(KEYS.PAGES)) {
@@ -79,7 +68,8 @@ export const TagsContent = () => {
     queryFn: () => getTags(url),
   });
 
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: getTags,
     onSuccess: () => {
@@ -107,7 +97,7 @@ export const TagsContent = () => {
   }
 
   if (sort && sort !== VALUES.SORT_ASC && sort !== VALUES.SORT_DESC) {
-    return <Title>{TITLES.BAD_SORT}</Title>
+    return <Title>{TITLES.BAD_SORT}</Title>;
   }
 
   if (pagesNumber < pageNumber) {

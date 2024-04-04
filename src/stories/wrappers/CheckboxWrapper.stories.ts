@@ -4,7 +4,7 @@ import { fn } from '@storybook/test';
 import { CheckboxWrapper } from '../../components/wrappers/CheckboxWrapper';
 
 const meta = {
-  title: 'Example/CheckboxWrapper',
+  title: 'Components/CheckboxWrapper',
   component: CheckboxWrapper,
   parameters: {
     layout: 'centered',

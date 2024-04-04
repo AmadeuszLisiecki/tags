@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Title } from '../components/Title';
-import { TITLES } from '../helpers/titles';
+import { TITLES } from '../helpers/constants';
 
 const meta = {
-  title: 'Example/Title',
+  title: 'Components/Title',
   component: Title,
   parameters: {
     layout: 'centered',

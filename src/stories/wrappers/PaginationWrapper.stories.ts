@@ -4,7 +4,7 @@ import { fn } from '@storybook/test';
 import { PaginationWrapper } from '../../components/wrappers/PaginationWrapper';
 
 const meta = {
-  title: 'Example/PaginationWrapper',
+  title: 'Components/PaginationWrapper',
   component: PaginationWrapper,
   parameters: {
     layout: 'centered',

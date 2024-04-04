@@ -8,18 +8,16 @@ import {
   TAGS_DESC_LAST_10, 
   TAGS_DESC_LAST_15, 
   TAGS_DESC_MIDDLE_10,
-} from '../../helpers/tags/desc';
-import { 
   TAGS_ASC, 
   TAGS_ASC_FIRST_10, 
   TAGS_ASC_FIRST_15, 
   TAGS_ASC_LAST_10, 
   TAGS_ASC_LAST_15, 
   TAGS_ASC_MIDDLE_10,
-} from '../../helpers/tags/asc';
+} from '../../helpers/constants';
 
 const meta = {
-  title: 'Example/TableWrapper',
+  title: 'Components/TableWrapper',
   component: TableWrapper,
   parameters: {
     layout: 'centered',

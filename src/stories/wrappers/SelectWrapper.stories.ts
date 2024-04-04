@@ -2,9 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { SelectWrapper } from '../../components/wrappers/SelectWrapper';
+import { POSSIBLE_PAGES } from '../../helpers/constants';
 
 const meta = {
-  title: 'Example/SelectWrapper',
+  title: 'Components/SelectWrapper',
   component: SelectWrapper,
   parameters: {
     layout: 'centered',
@@ -16,25 +17,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const PAGES = ['1', '2', '3'];
-
 export const Selected1: Story = {
   args: {
-    possiblePagesCounts: PAGES,
-    selectedPagesCount: PAGES[0],
+    possiblePagesCounts: POSSIBLE_PAGES,
+    selectedPagesCount: POSSIBLE_PAGES[0],
   },
 };
 
 export const Selected2: Story = {
   args: {
-    possiblePagesCounts: PAGES,
-    selectedPagesCount: PAGES[1],
+    possiblePagesCounts: POSSIBLE_PAGES,
+    selectedPagesCount: POSSIBLE_PAGES[1],
   },
 };
 
 export const Selected3: Story = {
   args: {
-    possiblePagesCounts: PAGES,
-    selectedPagesCount: PAGES[2],
+    possiblePagesCounts: POSSIBLE_PAGES,
+    selectedPagesCount: POSSIBLE_PAGES[2],
   },
 };
