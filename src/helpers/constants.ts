@@ -272,7 +272,7 @@ export const TAGS_DESC_LAST_10 = TAGS_DESC.filter(
 export const TITLES = {
   FETCHING: 'Feching tags. Please wait!',
   ERROR: 'An error occured',
-  LOADED: 'List of tags with posts from Stackoverflow',
+  LOADED: 'List of tags with posts from Stack Overflow',
   'BAD_SORT': 'Bad sort value.',
   'INCORRECT_PAGES_CONFIG': 'Page number is greater than pages count.',
   'BAD_PAGES': 'Bad pages value.',

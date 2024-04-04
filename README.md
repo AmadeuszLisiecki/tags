@@ -1,7 +1,7 @@
 # Stackoverflow Tags
 
 ## Project description
-This project contains a list of the most and the least popular tags on Stackoverflow with post count. Users can adeptly administer their sort types and choose page count. Sort and pagination parameters are saved in the URL query. Furthermore, the project boasts a responsive design catering to mobile and desktop environments. Users can see, what kind of technologies are the most popular, and which are the least popular and decide to start to learn them. I learned, how to use MUI, React query, and Storybook. The project is created with Vite.
+This project contains a list of the most and the least popular tags on Stack Overflow with post count. Users can adeptly administer their sort types and choose page count. Sort and pagination parameters are saved in the URL query. Furthermore, the project boasts a responsive design catering to mobile and desktop environments. Users can see, what kind of technologies are the most popular, and which are the least popular and decide to start to learn them. I learned, how to use MUI, React query, and Storybook. The project is created with Vite.
 
 ## Requirements
 The project needs Node in [version 18+ or 20+](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) (tested with 18.20).
