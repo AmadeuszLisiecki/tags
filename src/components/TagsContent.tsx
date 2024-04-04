@@ -92,16 +92,20 @@ export const TagsContent = () => {
     return <Title>{`${TITLES.ERROR} - ${error.message}`}</Title>;
   }
 
-  if (pagesNumber > +VALUES.PAGE_3 || pageNumber > +VALUES.PAGE_3) {
-    return <Title>{TITLES.TOO_MANY_PAGES}</Title>;
-  }
-
   if (sort && sort !== VALUES.SORT_ASC && sort !== VALUES.SORT_DESC) {
     return <Title>{TITLES.BAD_SORT}</Title>;
   }
 
+  if (!POSSIBLE_PAGES.includes(pages)) {
+    return <Title>{TITLES.BAD_PAGES}</Title>;
+  }
+
+  if (!POSSIBLE_PAGES.includes(page)) {
+    return <Title>{TITLES.BAD_PAGE}</Title>;
+  }
+
   if (pagesNumber < pageNumber) {
-    return <Title>{TITLES.INCORRECT_PAGE}</Title>;
+    return <Title>{TITLES.INCORRECT_PAGES_CONFIG}</Title>;
   }
 
   let tags = data.items as Tag[];

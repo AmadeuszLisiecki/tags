@@ -39,14 +39,20 @@ export const BadSort: Story = {
   },
 };
 
-export const IncorrectPage: Story = {
+export const BadPage: Story = {
   args: {
-    children: TITLES.INCORRECT_PAGE,
+    children: TITLES.BAD_PAGE,
   },
 };
 
-export const TooManyPages: Story = {
+export const BadPages: Story = {
   args: {
-    children: TITLES.TOO_MANY_PAGES,
+    children: TITLES.BAD_PAGES,
+  },
+};
+
+export const BadPagesAndPageConfig: Story = {
+  args: {
+    children: TITLES.INCORRECT_PAGES_CONFIG,
   },
 };
