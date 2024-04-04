@@ -4,10 +4,10 @@
 This project contains a list of the most and the least popular tags on Stackoverflow with post count. Users can adeptly administer their sort types and choose page count. Sort and pagination parameters are saved in the URL query. Furthermore, the project boasts a responsive design catering to mobile and desktop environments. Users can see, what kind of technologies are the most popular, and which are the least popular and decide to start to learn them. I learned, how to use MUI, React query, and Storybook. The project is created with Vite.
 
 ## Requirements
-Project need Node in [version 18+ or 20+](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) (tested with 18.20).
+The project needs Node in [version 18+ or 20+](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) (tested with 18.20).
 
 ## Used technologies
-The project is based on 
+The project is based on: 
 * HTML,
 * CSS,
 * TypeScript,
@@ -27,12 +27,12 @@ Tags are downloaded from [tags API desc](https://api.stackexchange.com/2.3/tags?
 ## Run local project
 - Install ```npm i```
 - Run ```npm start```
-- Go to browser and type localhost:5173/tags in URL.
+- Go to the browser and type localhost:5173/tags in the URL.
 
 ## Storybook
-Project has designed Storybook.
-Run ```npm run storybook``` to see use of componets.
-Stories are saved in src/stories directory.
+The project has designed a Storybook.
+Run ```npm run storybook``` to see the use of components.
+Stories are saved in the src/stories directory.
 
 ## License
-The MIT License (MIT) described in [license file](/LIICENSE.txt).
+The MIT License (MIT) is described in [license file](/LIICENSE.txt).
